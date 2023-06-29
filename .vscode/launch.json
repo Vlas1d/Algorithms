@@ -7,11 +7,30 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Debug",
+            "name": "Structures",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\src\\creational\\${fileBasenameNoExtension}.ts",
+            "program": "${workspaceFolder}\\src\\data_structures\\${fileBasenameNoExtension}.ts",
+            "runtimeArgs": [
+                "-r",
+                "ts-node/register",
+                "-r",
+                "tsconfig-paths/register"
+            ],
+            "console": "integratedTerminal",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Algorithms",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\src\\data_structures\\${fileBasenameNoExtension}.ts",
             "runtimeArgs": [
                 "-r",
                 "ts-node/register",
