@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.ts",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "vlas1d",
   "license": "ISC",
   "devDependencies": {
+    "readline": "^1.3.0",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0"
   },
