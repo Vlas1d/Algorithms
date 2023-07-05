@@ -1,8 +1,8 @@
 class Queue<T> {
     private elements: T[] = [];
 
-    enqueue(...element: T[]): void {
-        this.elements.push(...element);
+    enqueue(...elements: T[]): void {
+        this.elements.push(...elements);
     }
 
     dequeue(): T {

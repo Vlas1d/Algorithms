@@ -2,8 +2,8 @@ class Queue {
     constructor() {
         this.elements = [];
     }
-    enqueue(...element) {
-        this.elements.push(...element);
+    enqueue(...elements) {
+        this.elements.push(...elements);
     }
     dequeue() {
         return this.elements.shift();
