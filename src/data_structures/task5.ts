@@ -1,5 +1,5 @@
 //------------------------Array List----------------------------
-
+/*
 const array_list: number[] = [];
 
 console.time('>>> Array List');
@@ -67,3 +67,4 @@ for (let i = 0; i < 1000000; i++) {
 console.timeEnd('>>> Linked List');
 
 //linked_list.print();
+*/
