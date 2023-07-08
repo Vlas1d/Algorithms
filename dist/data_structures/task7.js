@@ -64,5 +64,5 @@ console.timeEnd('>>> Selection Sort');
 console.time('>>> Insertion Sort');
 ArraySort.insertionSort(array3);
 console.timeEnd('>>> Insertion Sort');
-console.log(array2);
+console.log(array3);
 //# sourceMappingURL=task7.js.map
