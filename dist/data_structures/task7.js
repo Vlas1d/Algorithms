@@ -1,4 +1,57 @@
 class ArraySort {
+    static slice_(array) {
+        let temp = [];
+        let i = 0;
+        while (i < array.length) {
+            temp.push(ArraySort.selectionSort(array.slice(i, i + 2)));
+            i += 2;
+        }
+        return temp;
+    }
+    static sort_(a, b) {
+        let array = [];
+        while ((a.length !== 0 || b.length !== 0)) {
+            if (a.length !== 0 && b.length !== 0) {
+                if (a[0] >= b[0]) {
+                    array.push(b[0]);
+                    b.shift();
+                }
+                else {
+                    array.push(a[0]);
+                    a.shift();
+                }
+            }
+            else if (a.length !== 0) {
+                array.push(...a);
+                a.length = 0;
+            }
+            else if (b.length !== 0) {
+                array.push(...b);
+                b.length = 0;
+            }
+        }
+        a = [];
+        b = [];
+        return array;
+    }
+    static combinate_(arrays) {
+        let array = [];
+        let i = 0;
+        while (i < arrays.length) {
+            if (arrays[i + 1]) {
+                array.push(ArraySort.sort_(arrays[i], arrays[i + 1]));
+            }
+            else
+                array.push(arrays[i]);
+            i += 2;
+        }
+        i = 0;
+        arrays = [];
+        if (array.length > 1) {
+            array = this.combinate_(array);
+        }
+        return array;
+    }
     static bubbleSort(array) {
         const length = array.length;
         for (let i = 0; i < length - 1; i++) {
@@ -31,30 +84,43 @@ class ArraySort {
     }
     static insertionSort(array) {
         const length = array.length;
-        for (let i = 0; i < length - 1; i++) {
-            for (let j = 1; j < length - i; j++) {
-                if (array[j] < array[j - 1]) {
+        for (let i = 1; i < length; i++) {
+            for (let j = i; j > 0; j--) {
+                if (array[j] <= array[j - 1]) {
                     const temp = array[j];
                     array[j] = array[j - 1];
                     array[j - 1] = temp;
+                }
+                else {
+                    break;
                 }
             }
         }
         return array;
     }
-    static mergeSort(arr) {
-        return;
+    static mergeSort(array) {
+        const sort_array = [...ArraySort.combinate_(ArraySort.slice_(array)).flat()];
+        array.length = 0;
+        const chunkSize = 100000;
+        for (let i = 0; i < sort_array.length; i += chunkSize) {
+            const chunk = sort_array.slice(i, i + chunkSize);
+            array.push(...chunk);
+        }
+        return array;
     }
     static quickSort(arr) {
         return;
     }
 }
 let array1 = [];
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 4; i++) {
     array1.push(Math.floor(Math.random() * 100));
 }
 let array2 = [...array1];
 let array3 = [...array1];
+let array4 = [...array1];
+let array5 = [...array1];
+console.log(array4);
 console.time('>>> Bubble Sort');
 ArraySort.bubbleSort(array1);
 console.timeEnd('>>> Bubble Sort');
@@ -64,5 +130,8 @@ console.timeEnd('>>> Selection Sort');
 console.time('>>> Insertion Sort');
 ArraySort.insertionSort(array3);
 console.timeEnd('>>> Insertion Sort');
+console.time('>>> Merge Sort');
+ArraySort.mergeSort(array4);
+console.timeEnd('>>> Merge Sort');
 console.log(array3);
 //# sourceMappingURL=task7.js.map
