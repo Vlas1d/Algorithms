@@ -108,12 +108,32 @@ class ArraySort {
         }
         return array;
     }
-    static quickSort(arr) {
-        return;
+    static quickSort(array) {
+        if (array.length < 2) {
+            return array;
+        }
+        const pivotIndex = Math.floor(array.length / 2);
+        const pivot = array[pivotIndex];
+        const less = [];
+        const greater = [];
+        for (let i = 0; i < array.length; i++) {
+            if (i === pivotIndex) {
+                continue;
+            }
+            if (array[i] <= pivot) {
+                less.push(array[i]);
+            }
+            else {
+                greater.push(array[i]);
+            }
+        }
+        const sortedLess = quicksort(less);
+        const sortedGreater = quicksort(greater);
+        return sortedLess.concat(pivot, sortedGreater);
     }
 }
 let array1 = [];
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < 300000; i++) {
     array1.push(Math.floor(Math.random() * 100));
 }
 let array2 = [...array1];
@@ -122,16 +142,15 @@ let array4 = [...array1];
 let array5 = [...array1];
 console.log(array4);
 console.time('>>> Bubble Sort');
-ArraySort.bubbleSort(array1);
 console.timeEnd('>>> Bubble Sort');
 console.time('>>> Selection Sort');
-ArraySort.selectionSort(array2);
 console.timeEnd('>>> Selection Sort');
 console.time('>>> Insertion Sort');
-ArraySort.insertionSort(array3);
 console.timeEnd('>>> Insertion Sort');
 console.time('>>> Merge Sort');
 ArraySort.mergeSort(array4);
 console.timeEnd('>>> Merge Sort');
+console.time('>>> Quick Sort');
+console.timeEnd('>>> Quick Sort');
 console.log(array3);
 //# sourceMappingURL=task7.js.map
