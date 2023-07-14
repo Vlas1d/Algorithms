@@ -127,13 +127,13 @@ class ArraySort {
                 greater.push(array[i]);
             }
         }
-        const sortedLess = quicksort(less);
-        const sortedGreater = quicksort(greater);
+        const sortedLess = ArraySort.quickSort(less);
+        const sortedGreater = ArraySort.quickSort(greater);
         return sortedLess.concat(pivot, sortedGreater);
     }
 }
 let array1 = [];
-for (let i = 0; i < 300000; i++) {
+for (let i = 0; i < 100; i++) {
     array1.push(Math.floor(Math.random() * 100));
 }
 let array2 = [...array1];

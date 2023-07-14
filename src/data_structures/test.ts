@@ -1,43 +1,54 @@
+/*
+function quickSort(array) {
+    const stack = [{ left: 0, right: array.length - 1 }];
+
+    while (stack.length > 0) {
+        const { left, right } = stack.pop();
+
+        if (left >= right) {
+            continue;
+        }
+
+        const pivotIndex = partition(array, left, right);
+        stack.push({ left: left, right: pivotIndex - 1 });
+        stack.push({ left: pivotIndex + 1, right: right });
+    }
+
+    return array;
+}
+
+function partition(array, left, right) {
+    const pivot = array[right];
+    let i = left - 1;
+
+    for (let j = left; j <= right - 1; j++) {
+        if (array[j] <= pivot) {
+            i++;
+            swap(array, i, j);
+        }
+    }
+
+    swap(array, i + 1, right);
+    return i + 1;
+}
+
+function swap(array, i, j) {
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+}
+*/
+
 function quicksort(array: number[]): number[] {
-    // Базовий випадок: якщо масив містить менше двох елементів, він вже відсортований
-    if (array.length < 2) {
-        return array;
-    }
 
-    // Вибираємо опорний елемент (pivot)
-    const pivotIndex = Math.floor(array.length / 2);
-    const pivot = array[pivotIndex];
-
-    // Розбиваємо масив на дві підмасиви: елементи менші за опорний і елементи більші за опорний
-    const less = [];
-    const greater = [];
-    for (let i = 0; i < array.length; i++) {
-        if (i === pivotIndex) {
-            continue; // Пропускаємо опорний елемент
-        }
-        if (array[i] <= pivot) {
-
-            less.push(array[i]);
-        } else {
-            greater.push(array[i]);
-        }
-    }
-
-    // Рекурсивно сортуємо підмасиви
-    const sortedLess = quicksort(less);
-    const sortedGreater = quicksort(greater);
-
-    // Повертаємо поєднаний результат: менший підмасив, опорний елемент і більший підмасив
-    return sortedLess.concat(pivot, sortedGreater);
+    return
 }
 
-// Приклад використання
-const unsortedArray = [];
-
-for (let i = 0; i < 700000; i++) {
-    unsortedArray.push(Math.floor(Math.random() * 100));
+const array_1 = [/* your array of 700000 elements */];
+for (let i = 0; i < 100; i++) {
+    array_1.push(Math.floor(Math.random() * 100));
 }
-console.time('sss');
-const sortedArray = quicksort(unsortedArray);
-console.timeEnd('sss');
-console.log(sortedArray); // [1, 2, 3, 5, 7, 8]
+console.time('qsort');
+const sortedArray = quicksort(array_1);
+console.timeEnd('qsort');
+console.log(sortedArray);

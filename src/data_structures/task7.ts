@@ -153,9 +153,8 @@ class ArraySort {
             }
         }
 
-        const sortedLess = quicksort(less);
-        const sortedGreater = quicksort(greater);
-
+        const sortedLess = ArraySort.quickSort(less);
+        const sortedGreater = ArraySort.quickSort(greater);
         return sortedLess.concat(pivot, sortedGreater);
     }
 }
@@ -164,7 +163,7 @@ class ArraySort {
 
 let array1: number[] = [];
 
-for (let i = 0; i < 300000; i++) {
+for (let i = 0; i < 100; i++) {
     array1.push(Math.floor(Math.random() * 100));
 }
 
@@ -192,7 +191,7 @@ ArraySort.mergeSort(array4);
 console.timeEnd('>>> Merge Sort');
 
 console.time('>>> Quick Sort');
-//ArraySort.mergeSort(array5);
+//ArraySort.quickSort(array5);
 console.timeEnd('>>> Quick Sort');
 
 console.log(array3);
