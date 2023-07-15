@@ -22,11 +22,8 @@ function quickSort_(array) {
     return sortedLess.concat(pivot, sortedGreater);
 }
 const array_1 = [];
-for (let i = 0; i < 10000; i++) {
+for (let i = 0; i < 100000; i++) {
     array_1.push(Math.floor(Math.random() * 100));
 }
-console.time('Sort');
 const sortedArray = quickSort_(array_1);
-console.timeEnd('Sort');
-console.log(sortedArray);
 //# sourceMappingURL=test.js.map

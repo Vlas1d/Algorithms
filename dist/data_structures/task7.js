@@ -141,7 +141,7 @@ class ArraySort {
     }
 }
 let array1 = [];
-for (let i = 0; i < 10000; i++) {
+for (let i = 0; i < 100000; i++) {
     array1.push(Math.floor(Math.random() * 100));
 }
 let array2 = [...array1];
