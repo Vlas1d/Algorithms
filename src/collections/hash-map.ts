@@ -27,14 +27,6 @@ class HashMap<K, V> {
 }
 const map = new Map();
 const hash_map = new HashMap<any, any>();
-/*
-hash_map.set(212, 2444);
-hash_map.set('sahufjads', true);
-hash_map.set(false, '2444');
-hash_map.set({ a: 123, b: 4564, c: 'qwerr' }, 'Hello');
-
-console.log(hash_map.hash_map);
-*/
 
 const obj = { a: 500000, bg: 50010, str: '500000', arr: [500000, 500001, 500002], str1: `500000, 2500000, 25000000000}` };
 
