@@ -1,54 +1,77 @@
-/*
-function quickSort(array) {
-    const stack = [{ left: 0, right: array.length - 1 }];
+/*function quickSortIterative(arr: number[]): number[] {
+    const stack: number[][] = [];
+    stack.push([0, arr.length - 1]);
 
-    while (stack.length > 0) {
-        const { left, right } = stack.pop();
+    while (stack.length) {
+        const [low, high] = stack.pop()!;
+        const pivotIndex = partition(arr, low, high);
 
-        if (left >= right) {
-            continue;
+        if (pivotIndex - 1 > low) {
+            stack.push([low, pivotIndex - 1]);
         }
 
-        const pivotIndex = partition(array, left, right);
-        stack.push({ left: left, right: pivotIndex - 1 });
-        stack.push({ left: pivotIndex + 1, right: right });
+        if (pivotIndex + 1 < high) {
+            stack.push([pivotIndex + 1, high]);
+        }
     }
 
-    return array;
+    return arr;
 }
 
-function partition(array, left, right) {
-    const pivot = array[right];
-    let i = left - 1;
+function partition(arr: number[], low: number, high: number): number {
+    const pivot = arr[high];
+    let i = low - 1;
 
-    for (let j = left; j <= right - 1; j++) {
-        if (array[j] <= pivot) {
+    for (let j = low; j < high; j++) {
+        if (arr[j] < pivot) {
             i++;
-            swap(array, i, j);
+            const temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
     }
 
-    swap(array, i + 1, right);
-    return i + 1;
-}
+    const temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
 
-function swap(array, i, j) {
-    const temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
+    return i + 1;
 }
 */
 
-function quicksort(array: number[]): number[] {
+function quickSort_(array: number[]): number[] {
+    if (array.length < 2) {
+        return array;
+    }
 
-    return
+    const pivotIndex = Math.floor(array.length / 2);
+    const pivot = array[pivotIndex];
+
+    const less = [];
+    const greater = [];
+    for (let i = 0; i < array.length; i++) {
+        if (i === pivotIndex) {
+            continue;
+        }
+        if (array[i] <= pivot) {
+
+            less.push(array[i]);
+        } else {
+            greater.push(array[i]);
+        }
+    }
+
+    const sortedLess = quickSort_(less);
+    const sortedGreater = quickSort_(greater);
+    return sortedLess.concat(pivot, sortedGreater);
 }
 
-const array_1 = [/* your array of 700000 elements */];
-for (let i = 0; i < 100; i++) {
+
+const array_1 = [];
+for (let i = 0; i < 10000; i++) {
     array_1.push(Math.floor(Math.random() * 100));
 }
-console.time('qsort');
-const sortedArray = quicksort(array_1);
-console.timeEnd('qsort');
-console.log(sortedArray);
+console.time('Sort');
+const sortedArray = quickSort_(array_1);
+console.timeEnd('Sort');
+console.log(sortedArray); // [1, 2, 3, 5, 8, 9]  

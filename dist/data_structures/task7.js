@@ -109,31 +109,39 @@ class ArraySort {
         return array;
     }
     static quickSort(array) {
-        if (array.length < 2) {
-            return array;
-        }
-        const pivotIndex = Math.floor(array.length / 2);
-        const pivot = array[pivotIndex];
-        const less = [];
-        const greater = [];
-        for (let i = 0; i < array.length; i++) {
-            if (i === pivotIndex) {
-                continue;
+        const stack = [];
+        stack.push([0, array.length - 1]);
+        while (stack.length) {
+            const [low, high] = stack.pop();
+            const pivotIndex = ArraySort.partation(array, low, high);
+            if (pivotIndex - 1 > low) {
+                stack.push([low, pivotIndex - 1]);
             }
-            if (array[i] <= pivot) {
-                less.push(array[i]);
-            }
-            else {
-                greater.push(array[i]);
+            if (pivotIndex + 1 < high) {
+                stack.push([pivotIndex + 1, high]);
             }
         }
-        const sortedLess = ArraySort.quickSort(less);
-        const sortedGreater = ArraySort.quickSort(greater);
-        return sortedLess.concat(pivot, sortedGreater);
+        return array;
+    }
+    static partation(array, low, high) {
+        const pivot = array[high];
+        let i = low - 1;
+        for (let j = low; j < high; j++) {
+            if (array[j] < pivot) {
+                i++;
+                const temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+        const temp = array[i + 1];
+        array[i + 1] = array[high];
+        array[high] = temp;
+        return i + 1;
     }
 }
 let array1 = [];
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 10000; i++) {
     array1.push(Math.floor(Math.random() * 100));
 }
 let array2 = [...array1];
@@ -142,15 +150,19 @@ let array4 = [...array1];
 let array5 = [...array1];
 console.log(array4);
 console.time('>>> Bubble Sort');
+ArraySort.bubbleSort(array1);
 console.timeEnd('>>> Bubble Sort');
 console.time('>>> Selection Sort');
+ArraySort.selectionSort(array2);
 console.timeEnd('>>> Selection Sort');
 console.time('>>> Insertion Sort');
+ArraySort.insertionSort(array3);
 console.timeEnd('>>> Insertion Sort');
 console.time('>>> Merge Sort');
 ArraySort.mergeSort(array4);
 console.timeEnd('>>> Merge Sort');
 console.time('>>> Quick Sort');
+ArraySort.quickSort(array5);
 console.timeEnd('>>> Quick Sort');
-console.log(array3);
+console.log(array5);
 //# sourceMappingURL=task7.js.map

@@ -19,9 +19,23 @@ class HashMap {
         return hash.digest('hex');
     }
 }
+const map = new Map();
 const hash_map = new HashMap();
-hash_map.set(212, 2444);
-hash_map.set('sahufjads', true);
-hash_map.set(false, '2444');
-console.log(hash_map.hash_map);
+const obj = { a: 500000, bg: 50010, str: '500000', arr: [500000, 500001, 500002], str1: `500000, 2500000, 25000000000}` };
+for (let i = 0; i < 1000000; i++) {
+    if (i === 500000) {
+        hash_map.set(obj, i);
+        map.set(obj, i);
+    }
+    else {
+        hash_map.set({ a: i, bg: i + 10, str: i.toString(), arr: [i, i + 1, i + 2], str1: `${i},${i * 5}, ${i * i}` }, i);
+        map.set({ a: i, bg: i + 10, str: i.toString(), arr: [i, i + 1, i + 2], str1: `${i},${i * 5}, ${i * i}` }, i);
+    }
+}
+console.time('Map');
+console.log(map.get(obj));
+console.timeEnd('Map');
+console.time('Hash Map');
+console.log(hash_map.get(obj));
+console.timeEnd('Hash Map');
 //# sourceMappingURL=hash-map.js.map
