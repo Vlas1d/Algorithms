@@ -30,7 +30,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\src\\data_structures\\${fileBasenameNoExtension}.ts",
+            "program": "${workspaceFolder}\\src\\algorithms\\${fileBasenameNoExtension}.ts",
             "runtimeArgs": [
                 "-r",
                 "ts-node/register",

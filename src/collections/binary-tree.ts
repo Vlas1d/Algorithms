@@ -2,7 +2,6 @@ class BinaryTreeNode {
     value: number;
     left: BinaryTreeNode | null;
     right: BinaryTreeNode | null;
-
     constructor(value: number) {
         this.value = value;
         this.left = null;
@@ -20,7 +19,7 @@ class BinaryTree {
     insert(value: number): void {
         const newNode = new BinaryTreeNode(value);
 
-        if (this.root === null) {
+        if (!this.root) {
             this.root = newNode;
         }
         else {
@@ -28,9 +27,9 @@ class BinaryTree {
         }
     }
 
-    insertNode(thisNode: BinaryTreeNode, newNode: BinaryTreeNode): void {
-        if (thisNode.value > newNode.value) {
-            if (thisNode.left === null) {
+    private insertNode(thisNode: BinaryTreeNode, newNode: BinaryTreeNode): void {
+        if (newNode.value < thisNode.value) {
+            if (!thisNode.left) {
                 thisNode.left = newNode;
             }
             else {
@@ -38,7 +37,7 @@ class BinaryTree {
             }
         }
         else {
-            if (thisNode.right === null) {
+            if (!thisNode.right) {
                 thisNode.right = newNode;
             }
             else {
@@ -47,5 +46,25 @@ class BinaryTree {
         }
     }
 
+    search(value: number): boolean {
+        return this.searchNode(this.root, value);
+    }
 
+    private searchNode(thisNode: BinaryTreeNode, value: number): boolean {
+        if (!thisNode) {
+            return false;
+        }
+
+        if (thisNode.value === value) {
+            return true;
+        }
+        else {
+            if (value < thisNode.value) {
+                return this.searchNode(thisNode.left, value);
+            }
+            else {
+                return this.searchNode(thisNode.right, value);
+            }
+        }
+    }
 }
