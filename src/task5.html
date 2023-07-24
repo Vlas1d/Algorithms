@@ -17,12 +17,14 @@
     button,
     a {
         padding-top: 10px;
+        padding-left: 25px;
+        padding-right: 25px;
         margin: 50px;
         text-decoration: none;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100px;
+        width: auto;
         height: 40px;
         background: black;
         color: #fffee1;
@@ -43,15 +45,20 @@
     div {
         display: flex;
     }
+
+    label {
+        display: flex;
+        color: #fffee1;
+        margin-bottom: 20px;
+    }
 </style>
 
 <body>
+    <label>Enter data: "text; key; E" (E (encrypt) / D (decoding))</label>
     <div>
         <input id="input" type="text">
-        <button id="button">Go</button>
+        <button id="button">Encrypt/Decoding</button>
     </div>
 
-    <a href="task5.html">Task 5</a>
-
-    <script src="../dist/algorithms/task4.js"></script>
+    <script src="../dist/algorithms/task5.js"></script>
 </body>
