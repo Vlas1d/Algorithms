@@ -1,34 +1,48 @@
 const input_1 = document.getElementById('input') as HTMLInputElement;
 const button_1 = document.getElementById('button') as HTMLInputElement;
 
-const abc: string = 'ABCDEFGHIJKLMNOPRSTUVWXYZ';
+const abc: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 button_1.addEventListener('click', () => {
-    console.log(encrypt('hello, my name is Vlad', 25));
+    const arr: string[] = input_1.value.split(';')
+
+    if (arr.length < 3) console.log('Must be 3 arguments: string; key(number); action(E or D)');
+    else if (isNaN(parseInt(arr[1]))) console.log('The key must be a number!')
+    else if (parseInt(arr[1]) < 0) console.log('The key must be greater than zero!');
+    else if (arr[2].toUpperCase().includes('E')) console.log(encrypt(arr[0], parseInt(arr[1]), false));
+    else if (arr[2].toUpperCase().includes('D')) console.log(encrypt(arr[0], parseInt(arr[1]), true));
+    else console.log('The action is incorrect (must be E or D)');
 });
 
-function encrypt(str: string, key: number): string {
+function encrypt(str: string, key: number, encrypted: boolean): string {
     let result: string = '';
     str.split('').forEach((element) => {
         if (abc.indexOf(element.toUpperCase()) === -1) {
             result += element;
         }
         else {
-            result += abc[getIndex(element, key, false)];
+            if (!encrypted) result += abc[getIndexEncrypt(element, key)];
+            else result += abc[getIndexDecoding(element, key)];
         }
     });
     return result;
 }
 
-function decoding(str: string, key: number): string {
-    return
-}
-
-function getIndex(letter: string, key: number, encrypted: boolean): number {
+function getIndexEncrypt(letter: string, key: number): number {
     if (abc.indexOf(letter.toUpperCase()) + key < abc.length) {
         return abc.indexOf(letter.toUpperCase()) + key;
     }
     else {
         return (abc.indexOf(letter.toUpperCase()) + key) % abc.length;
+    }
+}
+
+function getIndexDecoding(letter: string, key: number): number {
+    if (abc.indexOf(letter.toUpperCase()) - key >= 0) {
+        return Math.abs(abc.indexOf(letter.toUpperCase()) - key);
+    }
+    else {
+        if (Math.abs((abc.indexOf(letter.toUpperCase()) - key) % abc.length) === 0) return 0;
+        else return abc.length - Math.abs((key - abc.indexOf(letter.toUpperCase())) % abc.length);
     }
 }
