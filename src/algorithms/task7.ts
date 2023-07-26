@@ -33,7 +33,7 @@ const graph_cities = new GraphCities();
     'Житомир', 'Вінниця', 'Київ', 'Одеса', 'Чернігів', 'Черкаси', 'Суми', 'Полтава', 'Кропивницький', 'Миколаїв', 'Харків',
     'Дніпро', 'Херсон', 'Севастополь', 'Луганськ', 'Донецьк', 'Запоріжжя'];*/
 
-const cities_ways: (string | number)[][] = [
+const cities_ways: any[][] = [
     ['Одеса', 'Вінниця', 423],
     ['Одеса', 'Кропивницький', 328],
     ['Одеса', 'Миколаїв', 133],
@@ -85,15 +85,10 @@ const cities_ways: (string | number)[][] = [
     ['Івано-Франківськ', 'Чернівці', 135]
 ];
 
-graph_cities.addCity('Одеса');
-graph_cities.addCity('B');
-graph_cities.addCity('C');
-graph_cities.addCity('D');
-
-graph_cities.addWay('A', 'B', 5);
-graph_cities.addWay('A', 'C', 3);
-graph_cities.addWay('B', 'D', 2);
-graph_cities.addWay('C', 'D', 4);
+for (let i = 0; i < cities_ways.length; i++) {
+    let [city1, city2, way] = cities_ways[i];
+    graph_cities.addWay(city1, city2, way);
+}
 
 console.log(graph_cities.getCities());
 console.log(graph_cities.getWays());
