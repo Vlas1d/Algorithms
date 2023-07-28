@@ -21,6 +21,54 @@ class GraphCities {
     getWays() {
         return this.adjacencyList.entries();
     }
+    getNeighbors(city) {
+        return this.adjacencyList.get(city);
+    }
+    shortestWay(startCity, targetCity) {
+        const distances = {};
+        const previousCities = {};
+        const visited = {};
+        for (const city of this.getCities()) {
+            distances[city] = (city === startCity) ? 0 : Infinity;
+        }
+        let currentCity = startCity;
+        while (currentCity !== targetCity) {
+            visited[currentCity] = true;
+            const neighbors = this.getNeighbors(currentCity);
+            for (const neighbor of neighbors) {
+                if (!visited[neighbor.city]) {
+                    const distance = distances[currentCity] + neighbor.way;
+                    if (distance < distances[neighbor.city]) {
+                        distances[neighbor.city] = distance;
+                        previousCities[neighbor.city] = currentCity;
+                    }
+                }
+            }
+            let nextCity = null;
+            let shortestDistance = Infinity;
+            for (const city of this.getCities()) {
+                if (!visited[city] && distances[city] < shortestDistance) {
+                    shortestDistance = distances[city];
+                    nextCity = city;
+                }
+            }
+            if (nextCity === null) {
+                break;
+            }
+            else {
+                currentCity = nextCity;
+            }
+        }
+        const totalWay = [targetCity];
+        let currentPrew = previousCities[targetCity];
+        while (currentPrew !== startCity) {
+            totalWay.push(currentPrew);
+            currentPrew = previousCities[currentPrew];
+        }
+        totalWay.push(startCity);
+        totalWay.reverse();
+        return [totalWay.join(' -> '), distances[targetCity]];
+    }
 }
 const graph_cities = new GraphCities();
 const cities_ways = [
@@ -78,6 +126,6 @@ for (let i = 0; i < cities_ways.length; i++) {
     let [city1, city2, way] = cities_ways[i];
     graph_cities.addWay(city1, city2, way);
 }
-console.log(graph_cities.getCities());
-console.log(graph_cities.getWays());
+const shortestTuple = graph_cities.shortestWay('Одеса', 'Київ');
+console.log(`>>> Way: ${shortestTuple[0]}; Distance: ${shortestTuple[1]} km`);
 //# sourceMappingURL=task7.js.map
