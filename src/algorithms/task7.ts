@@ -150,6 +150,6 @@ for (let i = 0; i < cities_ways.length; i++) {
     graph_cities.addWay(city1, city2, way);
 }
 
-const shortestTuple = graph_cities.shortestWay('Одеса', 'Київ');
+const shortestTuple = graph_cities.shortestWay('Одеса', 'Львів');
 
 console.log(`>>> Way: ${shortestTuple[0]}; Distance: ${shortestTuple[1]} km`);
