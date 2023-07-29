@@ -6,6 +6,7 @@ interface AlgSort {
 }
 
 class BubbleSort implements AlgSort {
+    // O(n^2)
     name = 'bubble sort';
     sort(array: number[]): number[] {
         const length: number = array.length;
@@ -23,6 +24,7 @@ class BubbleSort implements AlgSort {
 }
 
 class InsertionSort implements AlgSort {
+    // O(n^2)
     name = 'insertion sort';
     sort(array: number[]): number[] {
         const length = array.length;
@@ -43,6 +45,7 @@ class InsertionSort implements AlgSort {
 }
 
 class SelectionSort implements AlgSort {
+    // O(n^2)
     name = 'selection sort';
     sort(array: number[]): number[] {
         const length: number = array.length;
@@ -66,6 +69,7 @@ class SelectionSort implements AlgSort {
 }
 
 class MergeSort implements AlgSort {
+    // O(n log n)
     name = 'merge sort';
     slice_(array: number[]): Array<number>[] {
         let temp: Array<number>[] = [];
@@ -144,6 +148,7 @@ class MergeSort implements AlgSort {
 }
 
 class QuickSort implements AlgSort {
+    // O(n log n)
     name = 'quick sort';
     sort(array: number[]): number[] {
         const stack: number[][] = [];
